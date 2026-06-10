@@ -3,79 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Search - Discover, Explore, Search Smarter</title>
+    <meta name="description" content="NovaSearch - The Next Generation Search Engine. Fast, intelligent, and beautiful search technology for 2026.">
+    <meta name="keywords" content="search, engine, fast, intelligent, modern">
+    <meta name="theme-color" content="#0284c7">
+    <meta property="og:title" content="NovaSearch - Search the Future">
+    <meta property="og:description" content="Experience the next generation of search technology.">
+    <meta property="og:image" content="/nova-icon.png">
+    <title>NovaSearch - Search the Future | Next-Gen Search Engine</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-        <div class="logo-area">
-            <span class="logo-icon">⭐</span>
-            <h1 class="logo">Nova Search</h1>
+    <!-- Animated Background with Stars -->
+    <div class="animated-bg">
+        <div class="stars"></div>
+        <div class="gradient-blob blob-1"></div>
+        <div class="gradient-blob blob-2"></div>
+        <div class="gradient-blob blob-3"></div>
+        <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <!-- Header with Navigation -->
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo-wrapper">
+                <svg class="logo-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.4"/>
+                    <circle cx="20" cy="20" r="12" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                    <circle cx="20" cy="20" r="5" fill="currentColor"/>
+                    <path d="M28 28 L36 36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <h1 class="logo">NOVASEARCH</h1>
+            </div>
         </div>
-        <div class="header-actions">
-            <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+        <nav class="header-nav">
+            <a href="#features" class="nav-item nav-link">
+                <i class="fas fa-star"></i>
+                <span>Features</span>
+            </a>
+            <a href="#trending" class="nav-item nav-link">
+                <i class="fas fa-fire"></i>
+                <span>Trending</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" title="Ctrl+B">
                 <i class="fas fa-moon"></i>
             </button>
-        </div>
-    </div>
+        </nav>
+    </header>
 
-    <div class="container">
-        <p class="tagline">Discover • Explore • Search Smarter</p>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section with Tagline -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span><strong>Next-Generation Search Technology</strong></span>
+                </div>
+                <h2 class="hero-title"><strong>Search the Future</strong></h2>
+                <p class="hero-subtitle"><strong>Advanced AI-Powered Search Engine for the Modern Web</strong></p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value"><strong>500M+</strong></span>
+                        <span class="stat-label">Results/Second</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value"><strong>99.9%</strong></span>
+                        <span class="stat-label">Uptime</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value"><strong>2M+</strong></span>
+                        <span class="stat-label">Daily Users</span>
+                    </div>
+                </div>
+            </div>
 
-        <div class="search-section">
-            <div class="search-wrapper">
-                <i class="fas fa-search search-icon"></i>
-                <input 
-                    type="text" 
-                    id="searchInput"
-                    placeholder="Search anything..." 
-                    autocomplete="off"
-                    aria-label="Search">
-                <button id="searchBtn" class="search-btn" aria-label="Search button">
-                    <i class="fas fa-arrow-right"></i>
+            <!-- Advanced Search Bar -->
+            <div class="search-container">
+                <div class="search-bar-glass">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            class="search-input"
+                            placeholder="Ask anything..." 
+                            autocomplete="off"
+                            spellcheck="true"
+                            aria-label="Search NovaSearch">
+                        <div class="search-actions-inline">
+                            <button class="voice-search-btn" aria-label="Voice search" title="Click to speak">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <button class="camera-search-btn" aria-label="Image search" title="Search by image">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="search-suggestions-box" id="suggestions"></div>
+                </div>
+
+                <!-- Search Buttons -->
+                <div class="search-actions">
+                    <button id="searchBtn" class="btn btn-primary" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </button>
+                    <button class="btn btn-secondary" aria-label="I'm Feeling Lucky">
+                        <i class="fas fa-dice"></i>
+                        <span>Lucky</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Grid -->
+        <section class="categories-section">
+            <h3 class="section-label"><strong>🔍 Search Categories</strong></h3>
+            <div class="categories-grid">
+                <div class="category-card" data-type="all">
+                    <div class="card-icon">🌐</div>
+                    <div class="card-content">
+                        <h4><strong>Web</strong></h4>
+                        <p><strong>Full web search</strong></p>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+                <div class="category-card" data-type="images">
+                    <div class="card-icon">🖼️</div>
+                    <div class="card-content">
+                        <h4><strong>Images</strong></h4>
+                        <p><strong>Search photos</strong></p>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+                <div class="category-card" data-type="videos">
+                    <div class="card-icon">🎥</div>
+                    <div class="card-content">
+                        <h4><strong>Videos</strong></h4>
+                        <p><strong>Video content</strong></p>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+                <div class="category-card" data-type="news">
+                    <div class="card-icon">📰</div>
+                    <div class="card-content">
+                        <h4><strong>News</strong></h4>
+                        <p><strong>Latest headlines</strong></p>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+                <div class="category-card" data-type="shopping">
+                    <div class="card-icon">🛍️</div>
+                    <div class="card-content">
+                        <h4><strong>Shopping</strong></h4>
+                        <p><strong>Find products</strong></p>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search History -->
+        <section class="history-section" id="historySection" style="display: none;">
+            <div class="history-header">
+                <h3 class="section-label">📝 Recent Searches</h3>
+                <button class="clear-btn" id="clearHistoryBtn" aria-label="Clear history">
+                    <i class="fas fa-trash-alt"></i>
                 </button>
             </div>
-            <div class="search-suggestions" id="suggestions"></div>
-        </div>
+            <div class="history-list" id="searchHistory"></div>
+        </section>
+    </main>
 
-        <div class="categories-section">
-            <h2 class="section-title">Search by Category</h2>
-            <div class="categories">
-                <div class="card" data-type="all" title="Web Search">
-                    <div class="icon">🌐</div>
-                    <h3>Web</h3>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <span class="footer-logo">NovaSearch</span>
+                    <p class="footer-tagline">The Future of Search</p>
                 </div>
-                <div class="card" data-type="images" title="Image Search">
-                    <div class="icon">🖼️</div>
-                    <h3>Images</h3>
-                </div>
-                <div class="card" data-type="videos" title="Video Search">
-                    <div class="icon">🎥</div>
-                    <h3>Videos</h3>
-                </div>
-                <div class="card" data-type="news" title="News Search">
-                    <div class="icon">📰</div>
-                    <h3>News</h3>
-                </div>
-                <div class="card" data-type="shopping" title="Shopping Search">
-                    <div class="icon">🛍️</div>
-                    <h3>Shopping</h3>
-                </div>
+                <p class="footer-text">Powered by cutting-edge AI and machine learning technology</p>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <span class="separator">•</span>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <span class="separator">•</span>
+                <a href="#" class="footer-link">About Us</a>
+                <span class="separator">•</span>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-version">© 2026 NovaSearch Inc. • v2.0 • Built for the future</p>
             </div>
         </div>
-
-        <div class="history-section" id="historySection" style="display: none;">
-            <h2 class="section-title">Recent Searches</h2>
-            <div class="search-history" id="searchHistory"></div>
-            <button class="clear-history-btn" id="clearHistoryBtn">Clear History</button>
-        </div>
-
-        <div class="footer">
-            <p>Powered by Nova Search Engine Concept</p>
-            <p class="footer-meta">© 2026 Nova Search. Built for speed and simplicity.</p>
-        </div>
-    </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
