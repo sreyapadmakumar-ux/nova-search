@@ -3,53 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Search</title>
+    <title>Nova Search - Discover, Explore, Search Smarter</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-
-    <div class="container">
-
-        <div class="logo">
-            <span>N</span>ova Search
+    <div class="header">
+        <div class="logo-area">
+            <span class="logo-icon">⭐</span>
+            <h1 class="logo">Nova Search</h1>
         </div>
-
-        <p class="tagline">
-            Discover • Explore • Search Smarter
-        </p>
-
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search anything...">
-            <button>Search</button>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
-
-        <div class="categories">
-             <div class="card" data-type="images">
-                <div class="icon">🖼️</div>
-                <h3>Images</h3>
-            </div>
-
-            <div class="card" data-type="videos">
-                <div class="icon">🎥</div>
-                <h3>Videos</h3>
-            </div>
-
-            <div class="card" data-type="news">
-                <div class="icon">📰</div>
-                <h3>News</h3>
-            </div>
-
-        </div>
-            
-
-        <div class="footer">
-            Powered by Nova Search Engine Concept
-        </div>
-        <script src="script.js"></script>
-
     </div>
 
+    <div class="container">
+        <p class="tagline">Discover • Explore • Search Smarter</p>
+
+        <div class="search-section">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    placeholder="Search anything..." 
+                    autocomplete="off"
+                    aria-label="Search">
+                <button id="searchBtn" class="search-btn" aria-label="Search button">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="search-suggestions" id="suggestions"></div>
+        </div>
+
+        <div class="categories-section">
+            <h2 class="section-title">Search by Category</h2>
+            <div class="categories">
+                <div class="card" data-type="all" title="Web Search">
+                    <div class="icon">🌐</div>
+                    <h3>Web</h3>
+                </div>
+                <div class="card" data-type="images" title="Image Search">
+                    <div class="icon">🖼️</div>
+                    <h3>Images</h3>
+                </div>
+                <div class="card" data-type="videos" title="Video Search">
+                    <div class="icon">🎥</div>
+                    <h3>Videos</h3>
+                </div>
+                <div class="card" data-type="news" title="News Search">
+                    <div class="icon">📰</div>
+                    <h3>News</h3>
+                </div>
+                <div class="card" data-type="shopping" title="Shopping Search">
+                    <div class="icon">🛍️</div>
+                    <h3>Shopping</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-section" id="historySection" style="display: none;">
+            <h2 class="section-title">Recent Searches</h2>
+            <div class="search-history" id="searchHistory"></div>
+            <button class="clear-history-btn" id="clearHistoryBtn">Clear History</button>
+        </div>
+
+        <div class="footer">
+            <p>Powered by Nova Search Engine Concept</p>
+            <p class="footer-meta">© 2026 Nova Search. Built for speed and simplicity.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
