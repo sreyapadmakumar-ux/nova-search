@@ -3,374 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nova Search Results - Premium AI search results page">
     <title>Nova Search - Results</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Professional results page styling */
-        body {
-            background: #0a0e27 !important;
-            background-image: none !important;
-        }
-
-        .results-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 80px 20px 40px 20px;
-            text-align: left;
-            width: 100%;
-        }
-
-        .back-navigation {
-            margin-bottom: 48px;
-        }
-
-        .back-btn {
-            color: #38bdf8;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            font-weight: 800;
-            transition: all 0.3s ease;
-            padding: 10px 18px;
-            border-radius: 10px;
-            letter-spacing: 0.3px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        .back-btn:hover {
-            background: rgba(56, 189, 248, 0.12);
-            transform: translateX(-4px);
-            color: #0ea5e9;
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 4px 16px rgba(56, 189, 248, 0.15);
+        /* Results Page Specific Styles */
+        .results-page {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .results-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 28px;
-            margin-bottom: 50px;
-            padding-bottom: 28px;
-            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+            padding: var(--spacing-lg) var(--spacing-2xl);
+            background: rgba(5, 8, 22, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(79, 126, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
 
-        .results-header h2 {
-            font-size: 2.2rem;
+        .results-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+
+        .results-logo {
+            font-size: 20px;
             font-weight: 900;
-            cursor: pointer;
-            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 100%);
+            background: var(--gradient-neon);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            transition: all 0.3s ease;
-            letter-spacing: -1.2px;
-            text-transform: uppercase;
-            margin: 0;
-            white-space: nowrap;
-        }
-
-        .results-header h2:hover {
-            transform: scale(1.08);
-        }
-
-        .search-term-display {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(167, 139, 250, 0.15) 100%);
-            border: 2px solid rgba(56, 189, 248, 0.35);
-            padding: 16px 28px;
-            border-radius: 14px;
-            font-size: 1rem;
-            color: #e0e7ff;
-            font-weight: 700;
-            backdrop-filter: blur(15px);
-            flex: 1;
-            max-width: 500px;
-            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .search-term-display:hover {
-            border-color: rgba(56, 189, 248, 0.5);
-            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.2);
-        }
-
-        .search-term-display strong {
-            color: #38bdf8;
-            font-weight: 900;
-            letter-spacing: 0.7px;
-            text-transform: capitalize;
-        }
-
-        .results-info {
-            font-size: 0.95rem;
-            color: #94a3b8;
-            margin-bottom: 40px;
-            font-weight: 700;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
-        }
-
-        .results-info strong {
-            color: #e0e7ff;
-            font-weight: 800;
-        }
-
-        .simulated-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
-            border: 2px solid rgba(56, 189, 248, 0.25);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 28px;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px);
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            transition: transform var(--duration-base) var(--easing);
         }
 
-        .simulated-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .results-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .results-search-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: rgba(10, 19, 40, 0.4);
+            border: 1px solid rgba(79, 126, 255, 0.2);
+            border-radius: var(--radius-lg);
+            transition: all var(--duration-base) var(--easing);
+        }
+
+        .results-search-bar:focus-within {
+            background: rgba(10, 19, 40, 0.6);
+            border-color: rgba(79, 126, 255, 0.4);
+            box-shadow: var(--shadow-glow-sm);
+        }
+
+        .results-search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--color-text-primary);
+            font-size: 14px;
+        }
+
+        .results-search-bar input::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .results-container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-lg);
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
-            transition: left 0.5s ease;
-            pointer-events: none;
         }
 
-        .simulated-card:hover::before {
-            left: 100%;
+        .results-stats {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-2xl);
+            color: var(--color-text-muted);
+            font-size: 14px;
         }
 
-        .simulated-card:hover {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.10) 100%);
-            border-color: rgba(56, 189, 248, 0.6);
-            transform: translateY(-8px);
-            box-shadow: 0 8px 32px rgba(56, 189, 248, 0.25), 0 0 60px rgba(56, 189, 248, 0.1);
+        .results-stats span {
+            background: var(--gradient-neon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .simulated-card a {
-            color: #38bdf8;
-            font-size: 1.4rem;
-            text-decoration: none;
-            font-weight: 900;
+        .results-list {
+            display: grid;
+            gap: var(--spacing-xl);
+        }
+
+        .result-item {
             display: block;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
-            letter-spacing: -0.7px;
-            text-transform: capitalize;
+            padding: var(--spacing-lg);
+            background: rgba(10, 19, 40, 0.3);
+            border: 1px solid rgba(79, 126, 255, 0.15);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all var(--duration-base) var(--easing);
         }
 
-        .simulated-card a:hover {
-            color: #0ea5e9;
-            transform: translateX(6px);
+        .result-item:hover {
+            background: rgba(79, 126, 255, 0.15);
+            border-color: rgba(79, 126, 255, 0.3);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-glow-md);
         }
 
-        .simulated-card p {
-            color: #cbd5e1;
-            margin-top: 14px;
-            font-size: 1rem;
-            line-height: 1.7;
-            font-weight: 500;
+        .result-url {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: 12px;
+            color: var(--color-cyan);
+            margin-bottom: var(--spacing-xs);
         }
 
-        .simulated-card strong {
-            color: #e0e7ff;
-            font-weight: 800;
-            letter-spacing: 0.3px;
-        }
-
-        .results-empty {
-            text-align: center;
-            padding: 80px 20px;
-            color: #94a3b8;
-        }
-
-        .results-empty p {
-            font-size: 1.1rem;
+        .result-title {
+            font-size: 18px;
             font-weight: 700;
-            letter-spacing: 0.3px;
+            color: var(--color-text-primary);
+            margin-bottom: var(--spacing-sm);
         }
 
-        .results-empty p:first-child {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #e0e7ff;
+        .result-item:hover .result-title {
+            color: var(--color-cyan);
         }
 
-        .results-footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 2px solid rgba(56, 189, 248, 0.2);
+        .result-description {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        .no-results {
             text-align: center;
-            color: #64748b;
-            font-size: 0.95rem;
+            padding: var(--spacing-3xl) var(--spacing-lg);
+        }
+
+        .no-results-title {
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-lg);
+            background: var(--gradient-neon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .results-footer p {
-            margin: 0;
+        .no-results-text {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-2xl);
         }
 
-        .results-footer strong {
-            color: #38bdf8;
-            font-weight: 900;
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--gradient-neon);
+            color: var(--color-bg);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--duration-base) var(--easing);
+            box-shadow: var(--shadow-glow-md);
         }
 
-        /* Responsive design */
+        .back-to-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(0, 229, 255, 0.5);
+        }
+
         @media (max-width: 768px) {
-            .results-container {
-                padding: 60px 16px 30px 16px;
-            }
-
-            .results-header {
+            .results-header-content {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
+                gap: var(--spacing-md);
             }
 
-            .search-term-display {
-                max-width: 100%;
+            .results-search-bar {
                 width: 100%;
             }
 
-            .results-header h2 {
-                font-size: 1.6rem;
-            }
-
-            .simulated-card {
-                padding: 20px;
-            }
-
-            .simulated-card a {
-                font-size: 1.1rem;
-            }
-
-            .simulated-card p {
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .results-container {
-                padding: 50px 12px 20px 12px;
-            }
-
-            .results-header h2 {
-                font-size: 1.4rem;
-            }
-
-            .search-term-display {
-                font-size: 0.9rem;
-                padding: 10px 16px;
-            }
-
-            .simulated-card {
-                padding: 16px;
-                margin-bottom: 16px;
-            }
-
-            .simulated-card a {
-                font-size: 1rem;
-            }
-
-            .simulated-card p {
-                font-size: 0.9rem;
-                line-height: 1.5;
+            .result-title {
+                font-size: 16px;
             }
         }
     </style>
 </head>
-<body style="justify-content: flex-start; align-items: stretch;">
-
-    <div class="results-container">
-        <div class="back-navigation">
-            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left-long"></i> Return to Search</a>
-        </div>
-        
-        <div class="results-header">
-            <h2 onclick="window.location.href='index.html'" title="Back to NovaSearch">
-                <span style="background: linear-gradient(135deg, #38bdf8 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Nova</span>
-            </h2>
-            <div class="search-term-display">
-                <i class="fas fa-search" style="color: #38bdf8; margin-right: 8px;"></i>
-                <strong id="query-target">...</strong>
+<body>
+    <div class="results-page">
+        <!-- Results Header -->
+        <header class="results-header">
+            <div class="results-header-content">
+                <div class="results-logo" onclick="location.href='/'">N</div>
+                <div class="results-search-bar">
+                    <i class="fas fa-search" style="color: var(--color-text-muted);"></i>
+                    <input 
+                        type="text" 
+                        id="resultsSearchInput" 
+                        placeholder="Search..." 
+                        autocomplete="off">
+                </div>
             </div>
-        </div>
+        </header>
 
-        <div class="results-info">
-            Search Results for <strong id="query-display">...</strong>
-        </div>
+        <!-- Results Content -->
+        <main class="results-container">
+            <div class="results-stats">
+                About <span id="resultCount">42,000,000</span> results 
+                (<span id="resultTime">0.23</span> seconds)
+            </div>
 
-        <div id="results-list">
-        </div>
+            <div class="results-list" id="resultsList">
+                <!-- Sample results for demo -->
+                <a href="#" class="result-item">
+                    <div class="result-url">
+                        <i class="fas fa-globe"></i>
+                        nova-search.example.com › tech › guide
+                    </div>
+                    <div class="result-title">Advanced AI Search Technology Guide 2026</div>
+                    <div class="result-description">Discover how modern AI-powered search engines work. Learn about machine learning algorithms, natural language processing, and semantic search technologies that power next-generation search.</div>
+                </a>
 
-        <div class="results-footer">
-            <p>Powered by <strong>NovaSearch</strong> • Enterprise-Grade AI Search Engine</p>
-        </div>
+                <a href="#" class="result-item">
+                    <div class="result-url">
+                        <i class="fas fa-globe"></i>
+                        techblog.example.com › ai › breakthrough
+                    </div>
+                    <div class="result-title">2026 AI Breakthroughs: The Future of Intelligent Search</div>
+                    <div class="result-description">Explore the latest advancements in artificial intelligence and how they're revolutionizing search technology. From neural networks to deep learning models...</div>
+                </a>
+
+                <a href="#" class="result-item">
+                    <div class="result-url">
+                        <i class="fas fa-globe"></i>
+                        docs.nova-search.com › api › getting-started
+                    </div>
+                    <div class="result-title">Nova Search API Documentation</div>
+                    <div class="result-description">Official documentation for integrating Nova Search API into your applications. Comprehensive guides, code examples, and best practices for developers.</div>
+                </a>
+
+                <a href="#" class="result-item">
+                    <div class="result-url">
+                        <i class="fas fa-globe"></i>
+                        research.example.com › papers › search-ai
+                    </div>
+                    <div class="result-title">Research Paper: Neural Networks in Modern Search Engines</div>
+                    <div class="result-description">A comprehensive academic paper discussing the implementation of neural networks and machine learning in contemporary search engine architecture.</div>
+                </a>
+
+                <a href="#" class="result-item">
+                    <div class="result-url">
+                        <i class="fas fa-globe"></i>
+                        developers.example.com › tutorials › search
+                    </div>
+                    <div class="result-title">Building AI-Powered Search - Complete Tutorial</div>
+                    <div class="result-description">Step-by-step tutorial on building your own AI-powered search engine. Learn about indexing, ranking algorithms, and optimization techniques.</div>
+                </a>
+
+                <a href="#" class="result-item">
+                    <div class="result-url">
+                        <i class="fas fa-globe"></i>
+                        forum.example.com › discussions › ai-search
+                    </div>
+                    <div class="result-title">Community Discussion: Future of AI Search Technology</div>
+                    <div class="result-description">Join the community discussion about where AI-powered search is heading. Share insights, ask questions, and learn from experts in the field.</div>
+                </a>
+            </div>
+        </main>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Grab the search query from URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const query = urlParams.get('q') || '';
-            const type = urlParams.get('type') || 'all';
+        // Get search query from URL
+        const params = new URLSearchParams(window.location.search);
+        const query = params.get('q') || 'AI Search Technology';
 
-            // Display the query in both places
-            document.getElementById("query-target").textContent = query;
-            document.getElementById("query-display").textContent = query;
+        // Update page elements
+        document.getElementById('resultsSearchInput').value = query;
+        document.title = `${query} - Nova Search`;
 
-            // Generate mock search results dynamically
-            const resultsList = document.getElementById("results-list");
-            
-            if(query.trim() === "") {
-                resultsList.innerHTML = `
-                    <div class="results-empty">
-                        <p>No Search Query Provided</p>
-                        <p style="margin-top: 12px; font-size: 0.9rem; color: #64748b;">Please return to NovaSearch and enter a search query to display results.</p>
-                    </div>
-                `;
-                return;
+        // Search functionality
+        document.getElementById('resultsSearchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const newQuery = e.target.value.trim();
+                if (newQuery) {
+                    window.location.href = `results.html?q=${encodeURIComponent(newQuery)}`;
+                }
             }
-
-            resultsList.innerHTML = `
-                <div class="simulated-card">
-                    <a href="#">Executive Summary: ${query}</a>
-                    <p>Comprehensive analysis and strategic intelligence on <strong>${query}</strong>. NovaSearch's advanced AI algorithms have curated premium results from authoritative sources, delivering enterprise-grade insights optimized for <strong>${type}</strong> research with 99.9% accuracy.</p>
-                </div>
-                <div class="simulated-card">
-                    <a href="#">Technical Resources & Documentation</a>
-                    <p>Access professional documentation, technical specifications, and architectural frameworks related to <strong>${query}</strong>. Our platform aggregates verified information from industry leaders and peer-reviewed sources to provide authoritative guidance for informed decision-making.</p>
-                </div>
-                <div class="simulated-card">
-                    <a href="#">Market Trends & Industry Analysis</a>
-                    <p>Stay competitive with current market trends and expert analysis on <strong>${query}</strong>. NovaSearch leverages machine learning and real-time data integration to identify emerging patterns and deliver actionable intelligence for strategic planning and research.</p>
-                </div>
-            `;
         });
-    </script>
-</body>
-</html>
-                return;
-            }
 
-            resultsList.innerHTML = `
-                <div class="simulated-card">
-                    <a href="#">Top Custom Result for "${query}"</a>
-                    <p>This is a simulated search matching your request. Nova engine processed your data structure natively under the <strong>${type}</strong> category matrix.</p>
-                </div>
-                <div class="simulated-card">
-                    <a href="#">Exploring Information Architectures</a>
-                    <p>Discover academic files, technical project frameworks, and documentation regarding "${query}" compiled dynamically on the frontend interface.</p>
-                </div>
-            `;
+        // Add smooth hover effects to results
+        document.querySelectorAll('.result-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 10);
+            });
         });
     </script>
 </body>

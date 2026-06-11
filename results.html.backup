@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Search - Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Professional results page styling */
+        body {
+            background: #0a0e27 !important;
+            background-image: none !important;
+        }
+
+        .results-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px 40px 20px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .back-navigation {
+            margin-bottom: 48px;
+        }
+
+        .back-btn {
+            color: #38bdf8;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            padding: 10px 18px;
+            border-radius: 10px;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .back-btn:hover {
+            background: rgba(56, 189, 248, 0.12);
+            transform: translateX(-4px);
+            color: #0ea5e9;
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 4px 16px rgba(56, 189, 248, 0.15);
+        }
+
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+            margin-bottom: 50px;
+            padding-bottom: 28px;
+            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .results-header h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            cursor: pointer;
+            background: linear-gradient(135deg, #38bdf8 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+            letter-spacing: -1.2px;
+            text-transform: uppercase;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .results-header h2:hover {
+            transform: scale(1.08);
+        }
+
+        .search-term-display {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(167, 139, 250, 0.15) 100%);
+            border: 2px solid rgba(56, 189, 248, 0.35);
+            padding: 16px 28px;
+            border-radius: 14px;
+            font-size: 1rem;
+            color: #e0e7ff;
+            font-weight: 700;
+            backdrop-filter: blur(15px);
+            flex: 1;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .search-term-display:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.2);
+        }
+
+        .search-term-display strong {
+            color: #38bdf8;
+            font-weight: 900;
+            letter-spacing: 0.7px;
+            text-transform: capitalize;
+        }
+
+        .results-info {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-weight: 700;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        .results-info strong {
+            color: #e0e7ff;
+            font-weight: 800;
+        }
+
+        .simulated-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+            border: 2px solid rgba(56, 189, 248, 0.25);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 28px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .simulated-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+            transition: left 0.5s ease;
+            pointer-events: none;
+        }
+
+        .simulated-card:hover::before {
+            left: 100%;
+        }
+
+        .simulated-card:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.10) 100%);
+            border-color: rgba(56, 189, 248, 0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 32px rgba(56, 189, 248, 0.25), 0 0 60px rgba(56, 189, 248, 0.1);
+        }
+
+        .simulated-card a {
+            color: #38bdf8;
+            font-size: 1.4rem;
+            text-decoration: none;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+            letter-spacing: -0.7px;
+            text-transform: capitalize;
+        }
+
+        .simulated-card a:hover {
+            color: #0ea5e9;
+            transform: translateX(6px);
+        }
+
+        .simulated-card p {
+            color: #cbd5e1;
+            margin-top: 14px;
+            font-size: 1rem;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        .simulated-card strong {
+            color: #e0e7ff;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .results-empty {
+            text-align: center;
+            padding: 80px 20px;
+            color: #94a3b8;
+        }
+
+        .results-empty p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .results-empty p:first-child {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #e0e7ff;
+        }
+
+        .results-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px solid rgba(56, 189, 248, 0.2);
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .results-footer p {
+            margin: 0;
+        }
+
+        .results-footer strong {
+            color: #38bdf8;
+            font-weight: 900;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .results-container {
+                padding: 60px 16px 30px 16px;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .search-term-display {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .results-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .simulated-card {
+                padding: 20px;
+            }
+
+            .simulated-card a {
+                font-size: 1.1rem;
+            }
+
+            .simulated-card p {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .results-container {
+                padding: 50px 12px 20px 12px;
+            }
+
+            .results-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .search-term-display {
+                font-size: 0.9rem;
+                padding: 10px 16px;
+            }
+
+            .simulated-card {
+                padding: 16px;
+                margin-bottom: 16px;
+            }
+
+            .simulated-card a {
+                font-size: 1rem;
+            }
+
+            .simulated-card p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+        }
+    </style>
+</head>
+<body style="justify-content: flex-start; align-items: stretch;">
+
+    <div class="results-container">
+        <div class="back-navigation">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left-long"></i> Return to Search</a>
+        </div>
+        
+        <div class="results-header">
+            <h2 onclick="window.location.href='index.html'" title="Back to NovaSearch">
+                <span style="background: linear-gradient(135deg, #38bdf8 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Nova</span>
+            </h2>
+            <div class="search-term-display">
+                <i class="fas fa-search" style="color: #38bdf8; margin-right: 8px;"></i>
+                <strong id="query-target">...</strong>
+            </div>
+        </div>
+
+        <div class="results-info">
+            Search Results for <strong id="query-display">...</strong>
+        </div>
+
+        <div id="results-list">
+        </div>
+
+        <div class="results-footer">
+            <p>Powered by <strong>NovaSearch</strong> • Enterprise-Grade AI Search Engine</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Grab the search query from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q') || '';
+            const type = urlParams.get('type') || 'all';
+
+            // Display the query in both places
+            document.getElementById("query-target").textContent = query;
+            document.getElementById("query-display").textContent = query;
+
+            // Generate mock search results dynamically
+            const resultsList = document.getElementById("results-list");
+            
+            if(query.trim() === "") {
+                resultsList.innerHTML = `
+                    <div class="results-empty">
+                        <p>No Search Query Provided</p>
+                        <p style="margin-top: 12px; font-size: 0.9rem; color: #64748b;">Please return to NovaSearch and enter a search query to display results.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            resultsList.innerHTML = `
+                <div class="simulated-card">
+                    <a href="#">Executive Summary: ${query}</a>
+                    <p>Comprehensive analysis and strategic intelligence on <strong>${query}</strong>. NovaSearch's advanced AI algorithms have curated premium results from authoritative sources, delivering enterprise-grade insights optimized for <strong>${type}</strong> research with 99.9% accuracy.</p>
+                </div>
+                <div class="simulated-card">
+                    <a href="#">Technical Resources & Documentation</a>
+                    <p>Access professional documentation, technical specifications, and architectural frameworks related to <strong>${query}</strong>. Our platform aggregates verified information from industry leaders and peer-reviewed sources to provide authoritative guidance for informed decision-making.</p>
+                </div>
+                <div class="simulated-card">
+                    <a href="#">Market Trends & Industry Analysis</a>
+                    <p>Stay competitive with current market trends and expert analysis on <strong>${query}</strong>. NovaSearch leverages machine learning and real-time data integration to identify emerging patterns and deliver actionable intelligence for strategic planning and research.</p>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
+                return;
+            }
+
+            resultsList.innerHTML = `
+                <div class="simulated-card">
+                    <a href="#">Top Custom Result for "${query}"</a>
+                    <p>This is a simulated search matching your request. Nova engine processed your data structure natively under the <strong>${type}</strong> category matrix.</p>
+                </div>
+                <div class="simulated-card">
+                    <a href="#">Exploring Information Architectures</a>
+                    <p>Discover academic files, technical project frameworks, and documentation regarding "${query}" compiled dynamically on the frontend interface.</p>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
